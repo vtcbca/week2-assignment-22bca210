@@ -1,0 +1,61 @@
+sqlite>.open student.db
+
+1. Create table 
+
+sqlite> create table stud1
+   ...> (id int primary key,
+   ...> name text
+   ...> );
+
+sqlite> create table stud_details
+   ...> (id int,
+   ...> city text,
+   ...> mobileno int,
+   ...> foreign key(id) references stud1(id)
+   ...> );
+
+2. Insert minimum 10 records for each table.
+
+sqlite> insert into stud values(1,'om');
+sqlite> insert into stud values(2,'sai');
+sqlite> insert into stud values(3,'ram');
+sqlite> insert into stud values(4,'radha');
+sqlite> insert into stud values(5,'kishan');
+sqlite> insert into stud values(6,'rudra');
+sqlite> insert into stud values(7,'siya');
+sqlite> insert into stud values(8,'sita');
+sqlite> insert into stud values(9,'krishna');
+sqlite> insert into stud values(10,'varun');
+
+
+
+sqlite> insert into stud_details values(1,'Surat',1234567890);
+sqlite> insert into stud_details values(2,'Baroda',7856412352);
+sqlite> insert into stud_details values(3,'Vyara',7412564878);
+sqlite> insert into stud_details values(4,'Bardoli',9854632145);
+sqlite> insert into stud_details values(5,'Daman',7485963212);
+sqlite> insert into stud_details values(6,'Goa',7596874532);
+sqlite> insert into stud_details values(7,'Songadh',8563214521);
+sqlite> insert into stud_details values(8,'Diu',9877445522);
+sqlite> insert into stud_details values(9,'Mehsana',8574963214);
+sqlite> insert into stud_details values(10,'Kelisana',8574961245);
+
+3. Display whose student come from the Surat City.
+
+sqlite> select stud1.id,name ,city, mobileno from stud_details inner join stud1 on stud1.id=stud_details.id and city ='Surat';
+
+Output:-
+1|om|Surat|1234567890
+
+4. Display student details whose city name start with 'B'.
+
+sqlite> select stud1.id,name ,city, mobileno from stud_details inner join stud1 on stud1.id=stud_details.id and city like 'b%';
+
+Output:-
+2|sai|Baroda|7856412352
+4|radha|Bardoli|9854632145
+
+5. Update mobileno who are comming from 'Surat'
+
+sqlite> update stud_details set mobileno=1232568439 where city='surat' and id=1;
+
